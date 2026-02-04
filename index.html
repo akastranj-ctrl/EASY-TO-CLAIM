@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexSure - Premium AI Insurance Claims</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-background">
+        <div class="ambient-glow"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header / Nav -->
+        <header class="glass-header">
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i> NexSure <span class="ai-badge">AI</span>
+            </div>
+            <div class="step-progress" id="stepProgress">
+                <div class="step-item active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Personal</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Incident</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Evidence</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Review</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" data-step="5">
+                    <div class="step-circle">5</div>
+                    <span class="step-label">Submit</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+
+            <!-- Step 1: Personal Info -->
+            <section class="step-section active" id="step1">
+                <div class="glass-card fade-in-up">
+                    <div class="card-header">
+                        <h2>Start Your Claim</h2>
+                        <p>We'll look up your policy details automatically.</p>
+                    </div>
+                    <form id="formStep1" class="premium-form">
+                        <div class="input-group">
+                            <i class="fa-solid fa-user input-icon"></i>
+                            <input type="text" id="fullName" required placeholder=" ">
+                            <label, for="fullName">Full Name</label>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-envelope input-icon"></i>
+                            <input type="email" id="email" required placeholder=" ">
+                            <label for="email">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <i class="fa-solid fa-file-contract input-icon"></i>
+                            <input type="text" id="policyNumber" required placeholder=" ">
+                            <label for="policyNumber">Policy Number</label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-primary" onclick="nextStep(2)">
+                                Continue <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="ai-sidebar mobile-hidden">
+                    <div class="ai-bubble">
+                        <i class="fa-solid fa-robot"></i>
+                        <p>Hello! I'm your AI assistant. I'll help you file your claim in under 3 minutes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Incident Details -->
+            <section class="step-section" id="step2">
+                <div class="glass-card fade-in-up">
+                    <div class="card-header">
+                        <h2>Incident Details</h2>
+                        <p>Tell us what happened so we can assist.</p>
+                    </div>
+                    <form id="formStep2" class="premium-form">
+                        <div class="form-row">
+                            <div class="input-group half">
+                                <i class="fa-solid fa-calendar input-icon"></i>
+                                <input type="date" id="incidentDate" required>
+                                <label class="static-label">Date of Incident</label>
+                            </div>
+                            <div class="input-group half">
+                                <i class="fa-solid fa-location-dot input-icon"></i>
+                                <input type="text" id="location" required placeholder=" ">
+                                <label for="location">Location</label>
+                            </div>
+                        </div>
+
+                        <div class="smart-suggestions">
+                            <span class="suggestion-label">Common types:</span>
+                            <div class="pills">
+                                <button type="button" class="pill" onclick="selectIncidentType('Collision')">🚗
+                                    Collision</button>
+                                <button type="button" class="pill" onclick="selectIncidentType('Theft')">🕵️
+                                    Theft</button>
+                                <button type="button" class="pill" onclick="selectIncidentType('Water Damage')">💧 Water
+                                    Damage</button>
+                                <button type="button" class="pill" onclick="selectIncidentType('Medical')">🏥
+                                    Medical</button>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fa-solid fa-pen input-icon textarea-icon"></i>
+                            <textarea id="description" rows="4" required placeholder=" "></textarea>
+                            <label for="description">Describe what happened...</label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="prevStep(1)">Back</button>
+                            <button type="button" class="btn-primary" onclick="nextStep(3)">
+                                Next Step <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Step 3: Evidence Upload -->
+            <section class="step-section" id="step3">
+                <div class="glass-card fade-in-up">
+                    <div class="card-header">
+                        <h2>Evidence Upload</h2>
+                        <p>Photos and documents help speed up approval.</p>
+                    </div>
+
+                    <div class="upload-zone" id="dropZone">
+                        <div class="upload-icon-container">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Drag & Drop files here</h3>
+                        <p>or <span class="click-text">click to browse</span></p>
+                        <input type="file" id="fileInput" multiple hidden>
+                    </div>
+
+                    <div class="file-list" id="fileList">
+                        <!-- Files will be added here dynamically -->
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(4)">
+                            Review Files <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Review -->
+            <section class="step-section" id="step4">
+                <div class="glass-card fade-in-up">
+                    <div class="card-header">
+                        <h2>Review Summary</h2>
+                        <p>Please confirm all details are correct.</p>
+                    </div>
+
+                    <div class="review-grid">
+                        <div class="review-item">
+                            <span class="label">Policy Holder</span>
+                            <p id="reviewName">John Doe</p>
+                        </div>
+                        <div class="review-item">
+                            <span class="label">Policy Number</span>
+                            <p id="reviewPolicy">--</p>
+                        </div>
+                        <div class="review-item full-width">
+                            <span class="label">Incident Description</span>
+                            <p id="reviewDesc">--</p>
+                        </div>
+                        <div class="review-item full-width">
+                            <span class="label">Uploaded Evidence</span>
+                            <p id="reviewFiles">0 files attached</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="prevStep(3)">Edit</button>
+                        <button type="button" class="btn-primary btn-success" onclick="submitClaim()">
+                            Submit Claim <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 5: Success & Tracking -->
+            <section class="step-section" id="step5">
+                <div class="glass-card text-center fade-in-up">
+                    <div class="success-animation">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h2>Claim Submitted!</h2>
+                    <p class="claim-id">Claim ID: #INS<span id="claimIdDisplay">------</span></p>
+                    <p>Our AI is already reviewing your details.</p>
+
+                    <div class="tracking-timeline">
+                        <div class="track-node completed">
+                            <div class="dot"></div>
+                            <div class="text">Submitted</div>
+                        </div>
+                        <div class="track-line active"></div>
+                        <div class="track-node active">
+                            <div class="dot pulse"></div>
+                            <div class="text">AI Review</div>
+                        </div>
+                        <div class="track-line"></div>
+                        <div class="track-node">
+                            <div class="dot"></div>
+                            <div class="text">Decision</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-secondary" onclick="location.reload()">Return Home</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-fab" onclick="toggleChat()">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <div class="chatbot-window" id="chatWindow">
+        <div class="chat-header">
+            <span>NexSure AI Support</span>
+            <i class="fa-solid fa-xmark" onclick="toggleChat()" style="cursor:pointer"></i>
+        </div>
+        <div class="chat-body">
+            <div class="chat-msg bot">Hello! I can help you with your claim. What do you need assistance with?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type a message...">
+            <i class="fa-solid fa-paper-plane" style="color: var(--accent-teal)"></i>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
